@@ -24,3 +24,9 @@ export function login(req, res) {
   const token = signToken(user);
   res.json({ user: { id: user.id, name: user.name, email: user.email, role: user.role }, token });
 }
+
+export function me(req, res) {
+  const row = db.prepare('SELECT id, name, email, role FROM users WHERE id = ?').get(req.user.id);
+  if (!row) return res.status(404).json({ error: 'User not found' });
+  res.json(row);
+}
