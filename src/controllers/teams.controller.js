@@ -55,3 +55,18 @@ export function deleteTeam(req, res) {
   db.prepare('DELETE FROM teams WHERE id = ?').run(teamId);
   return res.status(204).end();
 }
+
+export function listTeamMembers(req, res) {
+  const { teamId } = req.params;
+  // Require the requester to be authenticated; membership check is optional per current policy
+  const rows = db
+    .prepare(
+      `SELECT u.id, u.name
+       FROM team_members tm
+       JOIN users u ON u.id = tm.user_id
+       WHERE tm.team_id = ?
+       ORDER BY u.name ASC`
+    )
+    .all(teamId);
+  res.json(rows);
+}

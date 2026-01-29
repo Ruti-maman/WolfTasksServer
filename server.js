@@ -10,6 +10,7 @@ import teamsRouter from './src/routes/teams.js';
 import projectsRouter from './src/routes/projects.js';
 import tasksRouter from './src/routes/tasks.js';
 import commentsRouter from './src/routes/comments.js';
+import usersRouter from './src/routes/users.js';
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use('/api/teams', teamsRouter);
 app.use('/api/projects', projectsRouter);
 app.use('/api/tasks', tasksRouter);
 app.use('/api/comments', commentsRouter);
+app.use('/api/users', usersRouter);
 
 // 404
 app.use((req, res) => {

@@ -5,7 +5,7 @@
     "_postman_id": "e9e1c2b6-7c7e-4c3a-9f6a-collection-temp"
   },
   "variable": [
-    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "baseUrl", "value": "http://localhost:3000/api" },
     { "key": "token", "value": "" },
     { "key": "teamId", "value": "" },
     { "key": "projectId", "value": "" },
@@ -119,11 +119,32 @@
           }
         },
         {
+          "name": "List Team Members",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": { "raw": "{{baseUrl}}/teams/{{teamId}}/members", "host": ["{{baseUrl}}"], "path": ["teams","{{teamId}}","members"] }
+          }
+        },
+        {
           "name": "Delete Team",
           "request": {
             "method": "DELETE",
             "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
             "url": { "raw": "{{baseUrl}}/teams/{{teamId}}", "host": ["{{baseUrl}}"], "path": ["teams","{{teamId}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "List Users",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": { "raw": "{{baseUrl}}/users", "host": ["{{baseUrl}}"], "path": ["users"] }
           }
         }
       ]

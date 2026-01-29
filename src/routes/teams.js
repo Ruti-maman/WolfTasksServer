@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { requireAuth } from '../middleware/auth.js';
-import { listTeams, createTeam, addMember, deleteTeam } from '../controllers/teams.controller.js';
+import { listTeams, createTeam, addMember, deleteTeam, listTeamMembers } from '../controllers/teams.controller.js';
 
 const router = Router();
 
@@ -11,6 +11,8 @@ router.get('/', listTeams);
 router.post('/', createTeam);
 
 router.post('/:teamId/members', addMember);
+
+router.get('/:teamId/members', listTeamMembers);
 
 router.delete('/:teamId', deleteTeam);
 
