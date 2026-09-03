@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS teams (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
+  description TEXT,
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
@@ -77,5 +78,13 @@ CREATE TABLE IF NOT EXISTS comments (
 `;
 
 db.exec(schema);
+
+// Database files created before teams.description existed (the CREATE TABLE
+// above only runs for new files) get the column added in place - otherwise
+// createTeam's INSERT hits "table teams has no column named description".
+const teamCols = db.prepare('PRAGMA table_info(teams)').all();
+if (!teamCols.some((c) => c.name === 'description')) {
+  db.exec('ALTER TABLE teams ADD COLUMN description TEXT');
+}
 
 export default db;
