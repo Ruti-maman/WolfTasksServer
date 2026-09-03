@@ -1,0 +1,17 @@
+# team-tasks-api on Cloudflare Workers + D1.
+#
+#   npx wrangler d1 create team-tasks            # once; paste the id below
+#   npx wrangler d1 execute team-tasks --remote --file=schema.sql
+#   npx wrangler deploy
+#
+# JWT secret (do not keep secrets in this file):
+#   npx wrangler secret put JWT_SECRET
+
+name = "team-tasks-api"
+main = "worker.js"
+compatibility_date = "2026-08-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "team-tasks"
+database_id = "PLACEHOLDER_SET_AFTER_D1_CREATE"
